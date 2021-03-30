@@ -1,0 +1,36 @@
+#:include login_succ.kv
+<Login>:
+    BoxLayout
+        id:login_layout
+        orientation:'vertical'
+        padding: [10,10,10,10]
+        spacing: 20
+
+        Label:
+            text: 'Hello! Please login.'
+            font_size:32
+
+        BoxLayout
+            orientation:'vertical'
+
+            Label:
+                text: 'Login:'
+                font_size:18
+
+            TextInput:
+                id:login
+
+        BoxLayout
+            orientation:'vertical'
+
+            Label:
+                text: 'Password:'
+                font_size:18
+
+            TextInput:
+                password:True
+                id:password
+        Button:
+            text: 'Login'
+            on_press: root.do_login(login.text,password.text)
+
