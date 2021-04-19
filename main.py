@@ -17,13 +17,23 @@ def main():
         dbc.add(room)
 
     while 1:  # menu
-        colors.pr_blue("1 - Add patient\n2 - Show all\n0 - Exit")
+        colors.pr_blue(
+            "1 - Add patient\n2 - Show all\n3 - Show patient\n4 - Add note to patient\n5 - Relocate patient\n"
+            "6 - Conditions monitor\n0 - Exit")
         x = int(input())
         if x == 1:
             C.add_patient()
         elif x == 2:
             C.show_all()
         elif x == 3:
+            C.find_patient(0)
+        elif x == 4:
+            C.find_patient(1)
+        elif x == 5:
+            C.find_patient(2)
+        elif x == 6:
+            C.show_conditions()
+        elif x == 7:
             C.test()
         elif x == 0:
             exit()

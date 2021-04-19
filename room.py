@@ -25,16 +25,18 @@ class Room:  # room class
         else:
             flag = 0
             for i in self.__patients:
-                if p.tempMax < i.tempMin or p.tempMin > i.tempMax:
+                if (p.tempMax < i.tempMin or p.tempMin > i.tempMax
+                        or p.humMax < i.humMin or p.humMin > i.humMax
+                        or p.light != i.light):
                     flag = 1
-                    break
-            if flag == 0:
-                self.__patients.append(p)
-                colors.pr_green("Patient safely added into room #" + str(self.__ID) + ".")
-                return 1
-            elif flag == 1:
-                colors.pr_red("Temperature conflict between patients!")
-                return 0
+                break
+        if flag == 0:
+            self.__patients.append(p)
+            colors.pr_green("Patient safely added into room #" + str(self.__ID) + ".")
+            return 1
+        elif flag == 1:
+            colors.pr_red("Health conflict between patients!")
+            return 0
 
     def show_patients(self):  # shows patients in room
         for p in self.__patients:
