@@ -8,19 +8,19 @@ class Room:  # room class
         self.__patients = []  # patients in room
         self.__MAX_SIZE = 3  # room max size
 
-    def getID(self):
+    def get_ID(self):
         return self.__ID
 
-    def getPatients(self):
+    def get_patients(self):
         return self.__patients
 
     def add(self, p: patient.Patient):  # adds a patient to room or tells if that's not possible
         if len(self.__patients) == 0:
             self.__patients.append(p)
-            colors.prGreen("Patient safely added into room #" + str(self.__ID) + ".")
+            colors.pr_green("Patient safely added into room #" + str(self.__ID) + ".")
             return 1
         elif len(self.__patients) >= self.__MAX_SIZE:
-            colors.prRed("Room full!")
+            colors.pr_red("Room full!")
             return 0
         else:
             flag = 0
@@ -30,12 +30,12 @@ class Room:  # room class
                     break
             if flag == 0:
                 self.__patients.append(p)
-                colors.prGreen("Patient safely added into room #" + str(self.__ID) + ".")
+                colors.pr_green("Patient safely added into room #" + str(self.__ID) + ".")
                 return 1
             elif flag == 1:
-                colors.prRed("Temperature conflict between patients!")
+                colors.pr_red("Temperature conflict between patients!")
                 return 0
 
-    def showPatients(self):  # shows patients in room
+    def show_patients(self):  # shows patients in room
         for p in self.__patients:
             print(p.name, p.lastName)

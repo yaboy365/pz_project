@@ -37,7 +37,7 @@ class Patient(Base):
         self.room = room
 
 
-def printRooms():
+def print_rooms():
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
     r = c.execute("SELECT * FROM Room")
@@ -45,7 +45,7 @@ def printRooms():
         print(row)
 
 
-def printPatient():
+def print_patient():
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
     r = c.execute("SELECT * FROM Patient")

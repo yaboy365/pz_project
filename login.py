@@ -2,12 +2,13 @@ import sqlite3
 from kivy.app import App
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import Screen, ScreenManager, SlideTransition
-from login_succ import login_succ
-from login_fail import login_fail
+from loginsuccess import LoginSuccess
+from loginfail import LoginFail
 
 
 class Login(Screen):
-    def check_credentials(self, login, password):
+    @staticmethod
+    def check_credentials(login, password):
         conn = sqlite3.connect('credentials.db')
         c = conn.cursor()
         r = c.execute("SELECT password FROM Credentials WHERE login=(?)", (login,))
@@ -44,7 +45,7 @@ class LoginApp(App):
     def build(self):
         manager = ScreenManager()
         manager.add_widget(Login(name='login'))
-        manager.add_widget(login_succ(name='login_succ'))
-        manager.add_widget(login_fail(name='login_fail'))
+        manager.add_widget(LoginSuccess(name='login_succ'))
+        manager.add_widget(LoginFail(name='login_fail'))
 
         return manager

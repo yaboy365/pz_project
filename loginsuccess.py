@@ -2,7 +2,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import Screen
 
 
-class login_succ(Screen):
+class LoginSuccess(Screen):
     def disconnect(self):
         # self.manager.transition = SlideTransition(direction="right")
         # self.manager.current = 'login'
