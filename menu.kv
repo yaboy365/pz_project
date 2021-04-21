@@ -1,0 +1,41 @@
+#:include login_fail.kv
+#:include addp.kv
+<Menu>:
+    BoxLayout
+        id:menu_layout
+        orientation:'vertical'
+        padding: [0,0,0,200]
+        spacing: 10
+
+        Label:
+            text: 'Successfully logged in.'
+            font_size:12
+
+        GridLayout
+            rows: 3
+            cols: 2
+            padding: 10
+            spacing: 10
+            Button:
+                text: 'Add patient'
+                on_press: root.AddP()
+            Button:
+                text: 'Show All'
+                on_press: root.ShowAll()
+            Button:
+                text: 'Show patient'
+                on_press: root.ShowP()
+            Button:
+                text: 'Add note to patient'
+                on_press: root.AddNote()
+            Button:
+                text: 'Relocate patient'
+                on_press: root.Relocate()
+            Button:
+                text: 'Conditions monitor'
+                on_press: root.Monitor()
+
+            Button:
+                text: 'Exit'
+                on_press: root.ExitApp()
+

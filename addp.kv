@@ -1,0 +1,55 @@
+#:include menu.kv
+<Addp>:
+    GridLayout
+        rows: 12
+        cols: 2
+        padding: 5
+        spacing: 2
+
+        Label:
+            text: 'Adding new patient:'
+            font_size:24
+
+        Label:
+            text:' '
+        Label:
+            text: 'Name'
+        TextInput:
+            id:name
+        Label:
+            text: 'Last Name'
+        TextInput:
+            id:last_name
+        Label:
+            text: 'Minimal temperature'
+        TextInput:
+            id:tempmin
+        Label:
+            text: 'Maximal temperature'
+        TextInput:
+            id:tempmax
+        Label:
+            text: 'Minimal humidity'
+        TextInput:
+            id:hummin
+        Label:
+            text: 'Maximal humidity'
+        TextInput:
+            id:hummax
+        Label:
+            text: 'Light determinant Yes/No'
+        TextInput:
+            id:light
+        Label:
+            text: 'Additional information'
+        TextInput:
+            id:note
+
+
+        Button:
+            text: 'Back'
+            on_press: root.Back()
+        Button:
+            text: 'Add'
+            on_press: root.ExitApp()
+
