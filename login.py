@@ -4,7 +4,8 @@ from kivy.properties import StringProperty
 from kivy.uix.screenmanager import Screen, ScreenManager, SlideTransition
 from loginsuccess import LoginSuccess
 from loginfail import LoginFail
-
+from menu import Menu
+from addp import AddP
 
 class Login(Screen):
     @staticmethod
@@ -28,7 +29,8 @@ class Login(Screen):
 
         if self.check_credentials(login, password):
             self.manager.transition = SlideTransition(direction="left")
-            self.manager.current = 'login_succ'
+            #self.manager.current = 'login_succ'
+            self.manager.current = 'menu'
         else:
             self.manager.transition = SlideTransition(direction="left")
             self.manager.current = 'login_fail'
@@ -47,5 +49,7 @@ class LoginApp(App):
         manager.add_widget(Login(name='login'))
         manager.add_widget(LoginSuccess(name='login_succ'))
         manager.add_widget(LoginFail(name='login_fail'))
+        manager.add_widget(Menu(name='menu'))
+        manager.add_widget(AddP(name='addp'))
 
         return manager
