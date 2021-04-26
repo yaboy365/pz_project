@@ -2,6 +2,9 @@ import sqlite3
 from kivy.app import App
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import Screen, ScreenManager, SlideTransition
+
+from add_note import AddNote
+from clinic import Clinic
 from loginsuccess import LoginSuccess
 from loginfail import LoginFail
 from menu import Menu
@@ -31,6 +34,7 @@ class Login(Screen):
             self.manager.transition = SlideTransition(direction="left")
             #self.manager.current = 'login_succ'
             self.manager.current = 'menu'
+            #self.manager.current = 'add_note'
         else:
             self.manager.transition = SlideTransition(direction="left")
             self.manager.current = 'login_fail'
@@ -44,12 +48,15 @@ class LoginApp(App):
     login = StringProperty(None)
     password = StringProperty(None)
 
+
     def build(self):
         manager = ScreenManager()
         manager.add_widget(Login(name='login'))
         manager.add_widget(LoginSuccess(name='login_succ'))
         manager.add_widget(LoginFail(name='login_fail'))
         manager.add_widget(Menu(name='menu'))
+        manager.add_widget(AddNote(name='addnote'))
         manager.add_widget(AddP(name='addp'))
+        #manager.add_widget(AddNote(name='add_note'))
 
         return manager

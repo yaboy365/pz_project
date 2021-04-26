@@ -6,12 +6,13 @@ from login import LoginApp
 
 def main():
     # create() do stworzenia bd z hasłami do testów
-    LoginApp().run()
+
     dbc = db_controller.DBController()  # declaring DB Controller
     C = clinic.Clinic()  # declaring clinic
     C.add_room()  # add room 0 - 2
     C.add_room()
     C.add_room()
+    LoginApp().run()
     for i in range(1, 4):
         room = db_controller.Room(number=i, size=5)
         dbc.add(room)

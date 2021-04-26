@@ -70,3 +70,5 @@ class DBController:
     def add(self, element):
         self.session.add(element)
         self.session.commit()
+    def get(self):
+        print('xd')

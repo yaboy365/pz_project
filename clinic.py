@@ -150,6 +150,7 @@ class Clinic:  # clinic class
                             colors.pr_red("2 - Abort")
                             flag = int(input())
 
+
     def find_patient(self, option):  # displays info abut given patient
         colors.pr_blue("Enter patient ID: ")
         patientID = int(input())

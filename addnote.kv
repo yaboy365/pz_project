@@ -1,0 +1,98 @@
+#:include menu.kv
+<AddNote>:
+    custom_date:custom_date
+
+    BoxLayout
+        orientation:'vertical'
+        padding: [10,10,10,10]
+        spacing: 10
+
+
+        Label:
+            text:'Add patient note:'
+            font_size:32
+        BoxLayout:
+            orientation:'horizontal'
+            Label:
+                #text:'Select Patient'
+                text:'Enter patient ID'
+            TextInput:
+                id:patient_id
+                on_touch_down: if self.collide_point(*args[1].pos): self.text = ""
+
+
+        BoxLayout
+            orientation:'horizontal'
+
+            BoxLayout
+                orientation:'vertical'
+
+                Label:
+                    text: 'Enter assesment name:'
+                    font_size:18
+
+                TextInput:
+                    id:assesment_type
+
+            BoxLayout
+                orientation:'vertical'
+
+                Label:
+                    text: 'Enter assesment result:'
+                    font_size:18
+
+                TextInput:
+                    id:assesment_result
+
+            BoxLayout
+                orientation:'vertical'
+
+                Label:
+                    text: 'Enter remarks:'
+                    font_size:18
+
+                TextInput:
+                    id:assesment_remarks
+        Label:
+            text:'Date of assesment'
+            font_size:18
+
+
+
+
+        BoxLayout:
+            orientation:'vertical'
+            halign:'left'
+
+            GridLayout:
+                cols:2
+
+                Label:
+                    text:'Now'
+                CheckBox:
+                    group:"date_select"
+                    on_active:
+                        root.custom_date.opacity=0
+
+                Label:
+                    text:'Enter date'
+                CheckBox:
+                    group:"date_select"
+                    id:xd
+                    on_active:
+                        root.custom_date.opacity=1
+
+        TextInput:
+            text:'Please enter date in DD/MM/YY HH:MM:SS format'
+            on_touch_down: if self.collide_point(*args[1].pos): self.text = ""
+            id:custom_date
+            opacity:0
+
+        Button:
+            text:'Submit'
+            on_press: root.submit(patient_id.text,assesment_type.text,assesment_result.text,assesment_remarks.text,custom_date.text)
+        Button:
+            text: 'Back'
+            on_press: root.backToMenu()
+
+
