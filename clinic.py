@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import patient
 import room
 import colors
@@ -75,7 +77,11 @@ class Clinic:  # clinic class
         x = int(input())
         if x == 1:  # add info
             colors.pr_blue("Enter additional info: ")
-            p.info = str(input())
+            additional_info = input()
+            time = datetime.now()
+            time = time.strftime("%d/%m/%Y %H:%M:%S")
+
+            p.info = '2|' + time + '|' + additional_info+'\n'
 
         colors.pr_blue("Do you want to add this patient?")  # confirmation
         colors.pr_blue("Name: " + p.name + " " + p.lastName)
@@ -171,10 +177,93 @@ class Clinic:  # clinic class
                             search = 1
                             break
                         elif option == 1:  # add note
-                            colors.pr_blue("Enter info: ")
-                            p.info += "\n" + str(input())
+                            colors.pr_blue("Please choose if you're entering:")
+                            colors.pr_green('1 - Medical Check-up')
+                            colors.pr_red('2 - Comments about the patient')
+                            while True:
+                                try:
+                                    type=input()
+                                except ValueError:
+                                    colors.pr_red("Please choose correct option!")
+                                    colors.pr_green('1 - Medical Check-up')
+                                    colors.pr_red('2 - Comments about the patient')
+                                    continue
+                                if(type=='1'):
+                                    colors.pr_blue('Please enter check-up type:')
+                                    assesment_type = input()
+
+                                    colors.pr_blue('Please enter check-up result:')
+                                    assesment_result = input()
+
+                                    colors.pr_blue('Do you want to add additional remarks?:')
+                                    colors.pr_green('1 - Yes')
+                                    colors.pr_red('2 - No')
+
+                                    remarks_if = input()
+                                    if(remarks_if=='1'):
+                                        colors.pr_blue('Please enter remarks:')
+                                        remarks = input()
+                                    elif(remarks_if=='2'):
+                                        remarks=''
+
+                                    colors.pr_blue('Was check up taken now?:')
+                                    colors.pr_green('1 - Check up was taken now (current time)')
+                                    colors.pr_red('2 - I want to enter date myself')
+
+                                    while True:
+                                        try:
+                                            time_if = input()
+                                        except ValueError:
+                                            colors.pr_red("Please choose correct option!")
+                                            colors.pr_green('1 - Check up was taken now (current time)')
+                                            colors.pr_red('2 - I want to enter date myself')
+                                            continue
+                                        if (time_if == '1'):
+                                            time=datetime.now()
+                                            time = time.strftime("%d/%m/%Y %H:%M:%S")
+                                            break
+                                        elif (time_if == '2'):
+                                            colors.pr_blue('Please enter date in DD/MM/YYYY HH:MM:SS format')
+
+                                            while True:
+                                                try:
+                                                    time = input()
+                                                    time = datetime.strptime(time, "%d/%m/%Y %H:%M:%S")  # sprawdzenie
+                                                except ValueError:
+                                                    colors.pr_red('Please enter date in DD/MM/YYYY HH:MM:SS format!')
+                                                    continue
+                                                else:
+                                                    break
+                                            break
+                                        else:
+                                            colors.pr_red("Please choose correct option!")
+                                            colors.pr_green('1 - Check up was taken now (current time)')
+                                            colors.pr_red('2 - I want to enter date myself')
+                                            continue
+
+                                    output = '1|' + str(time) + '|' + assesment_type+'|'+assesment_result+'|'+remarks
+                                    p.info +=output+'\n'
+                                    break
+
+                                elif(type=='2'):
+                                    colors.pr_blue('Please enter additional info')
+                                    additional_info=input()
+                                    time = datetime.now()
+                                    time = time.strftime("%d/%m/%Y %H:%M:%S")
+
+                                    output='2|'+time+'|'+additional_info
+                                    p.info+=output+'\n'
+                                    break
+                                else:
+                                    colors.pr_red("Please choose correct option!")
+                                    colors.pr_green('1 - Medical Check-up')
+                                    colors.pr_red('2 - Comments about the patient')
+                                    continue
+
+
                             search = 1
                             break
+
                         elif option == 2:  # reloacte patient
                             temp = p
                             r.get_patients().remove(p)
