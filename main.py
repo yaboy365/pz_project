@@ -13,14 +13,15 @@ def main():
     C.add_room()
     C.add_room()
     LoginApp().run()
+    """
     for i in range(1, 4):
-        room = db_controller.Room(number=i, size=5)
+        room = db_controller.Room(number=i, size=3)
         dbc.add(room)
-
+    """
     while 1:  # menu
         colors.pr_blue(
             "1 - Add patient\n2 - Show all\n3 - Show patient\n4 - Add note to patient\n5 - Relocate patient\n"
-            "6 - Conditions monitor\n0 - Exit")
+            "6 - Conditions monitor\n7 - Clear patients\n0 - Exit")
         x = int(input())
         if x == 1:
             C.add_patient()
@@ -35,6 +36,8 @@ def main():
         elif x == 6:
             C.show_conditions()
         elif x == 7:
+            dbc.clear_patients()
+        elif x == 8:
             C.test()
         elif x == 0:
             exit()

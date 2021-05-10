@@ -9,8 +9,8 @@ import db_controller
 class Clinic:  # clinic class
     def __init__(self):
         self.__rooms = []  # rooms collection
-        self.__nextRoomID = 0  # first free id for a room
-        self.__nextPatientID = 0  # first free id for a patient
+        self.__nextRoomID = 1  # first free id for a room
+        self.__nextPatientID = 1  # first free id for a patient
 
     def test(self):
         p = patient.Patient()
@@ -119,7 +119,7 @@ class Clinic:  # clinic class
                             if i.add(p) == 1:
                                 db_p = db_controller.Patient(name=p.name, surname=p.lastName, temp_max=p.tempMax,
                                                              temp_min=p.tempMin,
-                                                             room=number + 1)  # Creation of Patient for DB
+                                                             room=number)  # Creation of Patient for DB
                                 dbc.add(db_p)  # Adding Patient into DB
                                 flag = 0
                                 break
@@ -139,6 +139,7 @@ class Clinic:  # clinic class
                 colors.pr_red("Wrong input data!")
 
     def relocate(self, p: patient.Patient):  # setting new room for given patient
+        dbc = db_controller.DBController()  # DB Controller declaration
         flag = 1
         while flag == 1:
             while flag == 1:
@@ -149,6 +150,10 @@ class Clinic:  # clinic class
                 for i in self.__rooms:
                     if i.get_ID() == number:
                         if i.add(p) == 1:
+                            db_p = db_controller.Patient(name=p.name, surname=p.lastName, temp_max=p.tempMax,
+                                                         temp_min=p.tempMin,
+                                                         room=number)  # Creation of Patient for DB
+                            dbc.add(db_p)  # Adding Patient into DB
                             flag = 0
                             break
                         else:
@@ -158,6 +163,7 @@ class Clinic:  # clinic class
 
 
     def find_patient(self, option):  # displays info abut given patient
+        dbc = db_controller.DBController()  # DB Controller declaration
         colors.pr_blue("Enter patient ID: ")
         patientID = int(input())
         search = 0
@@ -167,6 +173,7 @@ class Clinic:  # clinic class
             for p in r.get_patients():
                 if patientID == p.ID:  # match
                     p.show_info()
+                    print(dbc.read_patient(patientID)) # DB Controller reading patient data from db
                     colors.pr_blue("Room #" + str(r.get_ID()))
                     colors.pr_blue("Is this the right patient?")  # confirmation
                     colors.pr_green("1 - Yes")
@@ -267,6 +274,14 @@ class Clinic:  # clinic class
                         elif option == 2:  # reloacte patient
                             temp = p
                             r.get_patients().remove(p)
+
+                            '''
+                            db_p = db_controller.Patient(id=patientID ,name=p.name, surname=p.lastName, temp_max=p.tempMax,
+                                                         temp_min=p.tempMin,
+                                                         room=r.get_ID())  # Creation of Patient for DB
+                            dbc.delete_patient(db_p)  # Deleting Patient from DB
+                            '''
+                            dbc.delete_patient(patientID)  # Deleting Patient from DB
                             self.relocate(temp)
                             search = 1
                             break
