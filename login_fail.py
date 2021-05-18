@@ -1,7 +1,7 @@
 from kivy.uix.screenmanager import Screen, SlideTransition
 
 
-class LoginFail(Screen):
+class login_fail(Screen):
     def to_login(self):
         self.manager.transition = SlideTransition(direction="right")
         self.manager.current = 'login'

@@ -1,4 +1,4 @@
-#:include login_succ.kv
+#:include login_fail.kv
 #:include menu.kv
 <Login>:
     BoxLayout
@@ -34,4 +34,3 @@
         Button:
             text: 'Login'
             on_press: root.do_login(login.text,password.text)
-

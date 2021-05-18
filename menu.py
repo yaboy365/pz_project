@@ -3,8 +3,6 @@ from kivy.uix.screenmanager import Screen, ScreenManager, SlideTransition
 import clinic
 
 
-
-
 class Menu(Screen):
 
     def AddP(self):
