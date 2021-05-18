@@ -89,11 +89,14 @@ class DBController:
         for row in r:
             return row
 
-    def delete_patient(self, element):
+    def delete_patient_old(self, element):
         conn = sqlite3.connect('database.db')
         c = conn.cursor()
         r = c.execute("DELETE FROM Patient  WHERE id == " + str(element))
 
+    def delete_patient(self, element):
+        with self.engine.connect() as connection:
+            result = connection.execute(text("DELETE FROM Patient WHERE id == " + str(element)))
     """
     def delete(self, element):
         query = delete([self.tab_db]).where(self.tab_db.columns.id == element)
